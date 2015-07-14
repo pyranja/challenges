@@ -1,0 +1,23 @@
+# http://editorconfig.org
+
+root = true
+
+[*]
+# force unix endings and utf-8 everywhere
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+indent_style = space
+indent_size = 2
+
+[Makefile]
+# tabs are syntax elements in make
+indent_style = tab
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{bat,ps1}]
+end_of_line = crlf

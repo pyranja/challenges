@@ -1,0 +1,27 @@
+# mvn #
+target/
+
+# vagrant #
+.vagrant
+
+# frontend-stack #
+dist/
+node_modules/
+bower_components/
+.sass-cache
+.tmp
+
+# intellij #
+.idea/
+*.iml
+
+# eclipse #
+.settings/
+.project
+.classpath
+
+# R-Studio #
+*.Rproj
+.Rproj.user/
+.Rhistory
+.RData
