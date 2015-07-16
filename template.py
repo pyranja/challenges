@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys
+import sys, logging
 
 
 def solve(n):
@@ -13,4 +13,5 @@ def main(cases):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.WARN)
     print(main(sys.stdin.readlines()[1:]))

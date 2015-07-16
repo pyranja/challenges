@@ -1,5 +1,7 @@
 # run hackerrank solution files
-from eX import main
+from e3 import main
+import logging
 
-input = [1, 10, 17, 13195]
+logging.basicConfig(level=logging.INFO)
+input = [10000001]
 print(main(input))
