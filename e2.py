@@ -17,6 +17,11 @@ def fib(limit):
         predecessor = temp
 
 
-cases = sys.stdin.readlines()[1:]
-for line in cases:
-    print(solve(int(line)))
+# ========================================= boilerplate ========================================== #
+
+def main(cases):
+    return '\n'.join([str(solve(int(case))) for case in cases])
+
+
+if __name__ == '__main__':
+    print(main(sys.stdin.readlines()[1:]))
