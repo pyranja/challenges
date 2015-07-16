@@ -4,6 +4,9 @@ target/
 # vagrant #
 .vagrant
 
+# python #
+__pycache__/
+
 # frontend-stack #
 dist/
 node_modules/
