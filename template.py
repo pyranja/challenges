@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys, logging
 
+"""insert_challenge_description"""
 
 def solve(n):
     pass
