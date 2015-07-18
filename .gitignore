@@ -6,6 +6,7 @@ target/
 
 # python #
 __pycache__/
+.hypothesis/
 
 # frontend-stack #
 dist/
