@@ -1,31 +1,20 @@
-# mvn #
-target/
-
-# vagrant #
-.vagrant
-
 # python #
 __pycache__/
 .hypothesis/
 
-# frontend-stack #
-dist/
-node_modules/
-bower_components/
-.sass-cache
-.tmp
-
 # intellij #
 .idea/
 *.iml
+*.ipr
+*.iws
 
 # eclipse #
 .settings/
 .project
 .classpath
 
-# R-Studio #
-*.Rproj
-.Rproj.user/
-.Rhistory
-.RData
+# vagrant #
+.vagrant
+
+# osx #
+.DS_Store

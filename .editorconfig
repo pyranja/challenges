@@ -23,5 +23,5 @@ indent_size = 4
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{bat,ps1}]
+[*.{bat,ps1,psm1,psd1,ps1xml}]
 end_of_line = crlf
