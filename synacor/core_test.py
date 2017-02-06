@@ -1,5 +1,5 @@
 import unittest
-from core import ROM
+from core import *
 
 class ROMTest(unittest.TestCase):
     def setUp(self):
@@ -23,6 +23,13 @@ class ROMTest(unittest.TestCase):
     def test_read_word_after_eof(self):
         with self.assertRaises(IndexError):
             self.subject.read(3)
+
+    def test_read_illegal_word(self):
+        subject = ROM(b'\x08\xFF\xFF\xFF')
+        with self.assertRaises(ValueError):
+            subject.read_int(0)
+        with self.assertRaises(ValueError):
+            subject.read_int(1)
 
     def test_reports_custom_length(self):
         self.assertEqual(11, len(ROM(b'\x00\x01', 22)))

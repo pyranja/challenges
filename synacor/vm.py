@@ -1,28 +1,34 @@
-import sys, argparse, unittest, logging
+import sys, argparse, logging
+from core import ROM
+from opcodes import OPCODES
 
-LOG = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
-class ROM():
-    def __init__(self, data, size = None):
-        self.memory = data
-        byte_count = size if size is not None else len(data)
-        if byte_count % 2 > 0:
-            raise ValueError("byte count must be a multiple of 2")
-        self.size = byte_count // 2
-        self.offset = 0
+def disassemble(code, out):
+    '''disassemble a binary to given stream'''
+    ip = 0
+    while ip < len(code):
+        opcode = OPCODES.get(code.read_int(ip))
+        if opcode is None:
+            ip += 1
+            continue
+        args = [code.read_int(ip + idx + 1) for idx in range(0, opcode.arg_count)]
+        instruction = '[{:05}]   {:>4} {}\n'.format(ip, opcode.name, opcode.render_arguments(args))
+        out.write(instruction)
+        ip += opcode.arg_count + 1
 
-    def read_int(self, address):
-        if address >= self.size:
-            raise IndexError()
-        offset = address * 2
-        value = self.memory[offset:offset + 2]
-        return int.from_bytes(value, byteorder = 'little')
-
-    def __len__(self):
-        return self.size
-
-    def __getitem__(self, key):
-        return self.read_int(key)
+def assemble(code, out):
+    # translate instructions into int sequence
+    # convert int sequence to binary representation
+    pass
 
 if __name__ == '__main__':
     logging.basicConfig(level = logging.DEBUG)
+
+    parser = argparse.ArgumentParser(description='Convert synacor binaries to an op-code listing.')
+    parser.add_argument('binary')
+    args = parser.parse_args()
+
+    with open(args.binary, 'rb') as input:
+        code = ROM(input.read())
+        disassemble(code, sys.stdout)
