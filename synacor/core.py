@@ -1,5 +1,8 @@
 # core vm components
 
+class StopVirtualMachine(Exception):
+    '''thrown to signal program termination'''
+
 class ROM():
     def __init__(self, data, size = None):
         self.memory = data

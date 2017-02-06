@@ -4,6 +4,16 @@ from opcodes import OPCODES
 
 log = logging.getLogger(__name__)
 
+def run(code):
+    '''execute a binary program'''
+    ip = 0
+    while True:
+        instruction = OPCODES[code.read_int(ip)]
+        args = [code.read_int(ip + idx + 1) for idx in range(0, instruction.arg_count)]
+        log.debug('-> %s %s', instruction.name, instruction.render_arguments(*args))
+        instruction(*args)
+        ip += 1
+
 def disassemble(code, out):
     '''disassemble a binary to given stream'''
     ip = 0
@@ -13,7 +23,7 @@ def disassemble(code, out):
             ip += 1
             continue
         args = [code.read_int(ip + idx + 1) for idx in range(0, opcode.arg_count)]
-        instruction = '[{:05}]   {:>4} {}\n'.format(ip, opcode.name, opcode.render_arguments(args))
+        instruction = '[{:05}]   {:>4} {}\n'.format(ip, opcode.name, opcode.render_arguments(*args))
         out.write(instruction)
         ip += opcode.arg_count + 1
 
@@ -23,12 +33,14 @@ def assemble(code, out):
     pass
 
 if __name__ == '__main__':
-    logging.basicConfig(level = logging.DEBUG)
+    logging.basicConfig(level = logging.INFO)
 
     parser = argparse.ArgumentParser(description='Convert synacor binaries to an op-code listing.')
-    parser.add_argument('binary')
+    sub_commands = parser.add_subparsers()
+    parser.add_argument('input')
     args = parser.parse_args()
 
-    with open(args.binary, 'rb') as input:
+    with open(args.input, 'rb') as input:
         code = ROM(input.read())
-        disassemble(code, sys.stdout)
+        run(code)
+        # disassemble(code, sys.stdout)
