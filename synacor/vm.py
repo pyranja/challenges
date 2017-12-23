@@ -36,11 +36,10 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO)
 
     parser = argparse.ArgumentParser(description='Convert synacor binaries to an op-code listing.')
-    sub_commands = parser.add_subparsers()
     parser.add_argument('input')
     args = parser.parse_args()
 
     with open(args.input, 'rb') as input:
         code = ROM(input.read())
-        run(code)
-        # disassemble(code, sys.stdout)
+        # run(code)
+        disassemble(code, sys.stdout)
